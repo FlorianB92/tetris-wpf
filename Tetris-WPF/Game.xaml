@@ -19,7 +19,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\PN061747\Desktop\Bilder\Tetris.png"/>
+            <ImageBrush ImageSource="/Tetris.png"/>
         </Grid.Background>
         <Viewbox Grid.Row="1"
                  Grid.Column="1"

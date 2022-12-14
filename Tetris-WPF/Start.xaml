@@ -1,0 +1,16 @@
+﻿<Window x:Class="Tetris_WPF.Start"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tetris_WPF"
+        mc:Ignorable="d"
+        Title="Start" Height="450" Width="400">
+    <Grid Background="#FF544E4E">
+        <Label Content="Tetris" HorizontalAlignment="Center" Margin="0,26,0,0" VerticalAlignment="Top" FontSize="48" FontStyle="Italic" FontWeight="Bold" FontFamily="Microsoft Sans Serif"/>
+        <Button Content="Start" HorizontalAlignment="Left" Margin="147,155,0,0" VerticalAlignment="Top" Height="46" Width="121" FontSize="22"/>
+        <Button Content="Option" HorizontalAlignment="Left" Margin="147,242,0,0" VerticalAlignment="Top" Height="46" Width="121" FontSize="22"/>
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="147,329,0,0" VerticalAlignment="Top" Height="46" Width="121" FontSize="22"/>
+
+    </Grid>
+</Window>

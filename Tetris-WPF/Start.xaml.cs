@@ -23,5 +23,22 @@ namespace Tetris_WPF
         {
             InitializeComponent();
         }
+
+        private void StartIsClick(object sender, RoutedEventArgs e)
+        {
+            Game game = new Game();
+            game.Show();
+            Close();
+        }
+
+        private void OptionIsClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ExitIsClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

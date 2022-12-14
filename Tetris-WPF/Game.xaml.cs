@@ -23,5 +23,15 @@ namespace Tetris_WPF
         {
             InitializeComponent();
         }
+
+        private void KeyIsDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void KeyIsUp(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }

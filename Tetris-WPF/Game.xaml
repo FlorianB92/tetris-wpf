@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tetris_WPF"
         mc:Ignorable="d"
-        Title="Game" Height="552" Width="552" Background="#FF544E4E">
-    <Grid Margin="166,35,166,1" Background="#FFE2DADA" Width="220" Height="500">
-        
+        Title="Game" Height="600" Width="500" Background="#FF544E4E">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\PN061747\Desktop\Bilder\Tetris.png"/>
+        </Grid.Background>
+        <Viewbox Grid.Row="1"
+                 Grid.Column="1"
+                 Margin="0,0,0,0">
+            <Canvas x:Name="GameCanvas"
+                    Background="#101010"
+                    Width="220"
+                    Height="500"/>
+        </Viewbox>
     </Grid>
 </Window>

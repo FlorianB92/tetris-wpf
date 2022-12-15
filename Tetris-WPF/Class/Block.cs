@@ -9,7 +9,7 @@ using System.Windows.Threading;
 
 namespace Tetris_WPF
 {
-    internal class Block
+    public class Block
     {
         private Point curPosition;
         private Point[] objectShape;
@@ -23,6 +23,39 @@ namespace Tetris_WPF
             objectShape = RandomShape();
         }
 
+        public Point getPosition()
+        {
+            return curPosition;
+        }
+        public Brush getColor()
+        {
+            return color;
+        }
+        public Point[] getShape()
+        {
+            return objectShape;
+        }
+        public void moveRight()
+        {
+            curPosition.X += 1;
+        }
+        public void moveLeft()
+        {
+            curPosition.X -= 1;
+        }
+        public void moveDown()
+        {
+            curPosition.Y += 1;
+        }
+        public void moveRotation()
+        {
+            for(int i = 0; i < objectShape.Length; i++)
+            {
+                double x = objectShape[i].X;
+                objectShape[i].X = objectShape[i].Y * -1;
+                objectShape[i].Y = x;
+            }
+        }
         private Point[] RandomShape()
         {
             Random rand = new Random();
@@ -80,7 +113,7 @@ namespace Tetris_WPF
                         new Point(3,1)
                     };
                 case 5://Smashboy
-                    rotation = true;
+                    rotation = false;
                     color = Brushes.Yellow;
                     return new Point[]
                     {

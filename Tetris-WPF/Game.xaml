@@ -27,7 +27,9 @@
             <Canvas x:Name="GameCanvas"
                     Background="#101010"
                     Width="220"
-                    Height="500"/>
+                    Height="500">
+            </Canvas>
+                    
         </Viewbox>
     </Grid>
 </Window>

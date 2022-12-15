@@ -12,12 +12,14 @@ namespace Tetris_WPF
         private static int Height { get; set; }
 
         private static string direction;
+        private static int id;
 
         public Settings()
         {
             Width = 20;
             Height = 20;
             direction = "down";
+            id = 0;
         }
     }
 }

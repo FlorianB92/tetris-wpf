@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Tetris_WPF
 {
@@ -30,6 +31,11 @@ namespace Tetris_WPF
         }
 
         private void KeyIsUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void Event(object sender, )
         {
 
         }

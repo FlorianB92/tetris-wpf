@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Tetris_WPF"
         mc:Ignorable="d"
         Title="Game" Height="600" Width="500" Background="#FF544E4E">
-    <Grid>
+    <Grid x:Name="GridGame">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -27,9 +27,9 @@
             <Canvas x:Name="GameCanvas"
                     Background="#101010"
                     Width="220"
-                    Height="500">
-            </Canvas>
-                    
+                    Height="500"
+                    ClipToBounds="True"
+                    Loaded="GameCanvas_Loaded"/>
         </Viewbox>
     </Grid>
 </Window>

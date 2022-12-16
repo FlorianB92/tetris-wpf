@@ -8,10 +8,10 @@ namespace Tetris_WPF
 {
     internal class Settings
     {
-        private static int Width { get; set; }
-        private static int Height { get; set; }
+        public static int Width { get; set; }
+        public static int Height { get; set; }
 
-        private static string direction;
+        public static string direction;
         private static int id;
 
         public Settings()

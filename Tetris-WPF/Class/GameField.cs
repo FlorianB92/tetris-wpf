@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace Tetris_WPF
@@ -11,9 +14,8 @@ namespace Tetris_WPF
     public class GameField
     {
         private readonly int[,] grid;
-        private int Rows { get; set; }
-        private int Columns { get; set; }
-
+        public int Rows { get; set; }
+        public int Columns { get; set; }
 
         public GameField()
         {
@@ -24,6 +26,7 @@ namespace Tetris_WPF
             gameField.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             gameField.VerticalAlignment = System.Windows.VerticalAlignment.Center;
             gameField.ShowGridLines = true;
+            gameField.Background = Brushes.Yellow;
 
             // Define the Columns
             ColumnDefinition[] colDef = new ColumnDefinition[Columns];
@@ -42,7 +45,6 @@ namespace Tetris_WPF
             }
 
             // Add the Grid as the Content of the Parent Window Object
-
         }
     }
 }

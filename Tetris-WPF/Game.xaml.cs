@@ -20,6 +20,7 @@ namespace Tetris_WPF
     /// </summary>
     public partial class Game : Window
     {
+        
         public Game()
         {
             InitializeComponent();
@@ -33,6 +34,11 @@ namespace Tetris_WPF
         private void KeyIsUp(object sender, KeyEventArgs e)
         {
 
+        }
+
+        private void GameCanvas_Loaded(object sender, RoutedEventArgs e)
+        {
+            GameCanvas.Width = 2000;
         }
     }
 }

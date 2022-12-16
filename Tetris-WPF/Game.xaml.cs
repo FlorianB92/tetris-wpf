@@ -34,10 +34,5 @@ namespace Tetris_WPF
         {
 
         }
-
-        private void Event(object sender, )
-        {
-
-        }
     }
 }

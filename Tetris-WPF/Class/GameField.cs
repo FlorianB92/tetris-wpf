@@ -4,26 +4,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Shapes;
 
 namespace Tetris_WPF
 {
     public class GameField
     {
         private readonly int[,] grid;
-        private int Rows { get; }
-        private int Columns { get; }
+        private int Rows { get; set; }
+        private int Columns { get; set; }
 
-        public int this[int r, int c]
-        {
-            get => grid[r, c];
-            set=> grid[r, c] = value;
-        }
 
-        public GameField(int rows, int columns)
+        public GameField()
         {
-            Rows = rows;
-            Columns = columns;
-            grid =  new int[rows, columns];
+            // Create the grid
+            Grid gameField = new Grid();
+            gameField.Width = 220;
+            gameField.Height = 500;
+            gameField.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            gameField.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+            gameField.ShowGridLines = true;
+
+            // Define the Columns
+            ColumnDefinition[] colDef = new ColumnDefinition[Columns];
+            for(int i = 0; i < Columns; i++)
+            {
+                colDef[i] = new ColumnDefinition();
+                gameField.ColumnDefinitions.Add(colDef[i]);
+            }
+
+            // Define the Rows
+            RowDefinition[] rowDef = new RowDefinition[Rows];
+            for(int i = 0; i < Rows; i++)
+            {
+                rowDef[i] = new RowDefinition();
+                gameField.RowDefinitions.Add(rowDef[i]);
+            }
+
+            // Add the Grid as the Content of the Parent Window Object
+
         }
     }
 }

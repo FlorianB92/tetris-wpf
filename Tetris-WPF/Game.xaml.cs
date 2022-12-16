@@ -38,7 +38,7 @@ namespace Tetris_WPF
 
         private void GameCanvas_Loaded(object sender, RoutedEventArgs e)
         {
-            GameCanvas.Width = 2000;
+            Block block = new Block();
         }
     }
 }

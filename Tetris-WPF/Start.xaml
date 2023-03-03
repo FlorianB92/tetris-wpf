@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tetris_WPF"
         mc:Ignorable="d"
-        Title="Start" MinHeight="450" MinWidth="400" MaxHeight="450" MaxWidth="400">
+        Title="Start" MinHeight="600" MinWidth="500" MaxHeight="600" MaxWidth="500">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Tetris.png"/>
         </Grid.Background>
-        <Label Content="Tetris" HorizontalAlignment="Center" Margin="0,26,0,0" VerticalAlignment="Top" FontSize="48" FontStyle="Italic" FontWeight="Bold" FontFamily="Microsoft Sans Serif"/>
-        <Button Content="Start" HorizontalAlignment="Left" Margin="147,155,0,0" VerticalAlignment="Top" Height="46" Width="121" FontSize="22" Click="StartIsClick"/>
-        <Button Content="Option" HorizontalAlignment="Left" Margin="147,242,0,0" VerticalAlignment="Top" Height="46" Width="121" FontSize="22" Click="OptionIsClick"/>
-        <Button Content="Exit" HorizontalAlignment="Left" Margin="147,329,0,0" VerticalAlignment="Top" Height="46" Width="121" FontSize="22" Click="ExitIsClick"/>
+        <Label Content="Tetris" HorizontalAlignment="Center" Margin="0,23,0,0" VerticalAlignment="Top" FontSize="72" FontFamily="Microsoft Sans Serif" Height="97" Width="300" FontStyle="Italic" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+        <Button Content="Start" HorizontalAlignment="Center" Margin="0,161,0,0" VerticalAlignment="Top" Height="66" Width="170" FontSize="22" Click="StartIsClick"/>
+        <Button Content="Option" HorizontalAlignment="Center" Margin="0,279,0,0" VerticalAlignment="Top" Height="68" Width="170" FontSize="22" Click="OptionIsClick"/>
+        <Button Content="Exit" HorizontalAlignment="Center" Margin="0,403,0,0" VerticalAlignment="Top" Height="81" Width="170" FontSize="22" Click="ExitIsClick"/>
 
     </Grid>
 </Window>

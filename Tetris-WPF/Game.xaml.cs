@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,19 +17,16 @@ using Tetris_WPF.Class;
 
 namespace Tetris_WPF
 {
-    /// <summary>
-    /// Interaktionslogik für Game.xaml
-    /// </summary>
+
     public partial class Game : Window
     {
         GameField field = new GameField(10, 21);
         public Game()
         {
             InitializeComponent();
-            field.StartGame(gamegrid);
+            field.StartGame(gamegrid, score);
             KeyDown += KeyIsDown;
             KeyUp += KeyIsUp;
-
         }
 
         private void KeyIsDown(object sender, KeyEventArgs e)

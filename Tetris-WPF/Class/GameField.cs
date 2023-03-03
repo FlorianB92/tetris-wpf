@@ -30,6 +30,7 @@ namespace Tetris_WPF.Class
         bool[] numbers = new bool[7];
         public string richtung;
         int anzahl = 0;
+        int sc = 0;
 
         Random rand = new Random();
 
@@ -39,11 +40,11 @@ namespace Tetris_WPF.Class
             this.rows = rows;
         }
 
-        public void StartGame(Grid grid)
+        public void StartGame(Grid grid, Label score)
         {
             AddGridDefinition(grid);
             CreateBlock(grid);
-            Timer(grid);
+            Timer(grid, score);
 
         }
 
@@ -133,9 +134,9 @@ namespace Tetris_WPF.Class
             CreateBlock(grid);
         }
 
-        public void Update(object sender, EventArgs e, Grid grid)
+        public void Update(object sender, EventArgs e, Grid grid, Label score)
         {
-            CheckLines(grid);
+            CheckLines(grid, score);
             Move();
             for (int i = 0; i < 4; i++)
             {
@@ -144,12 +145,12 @@ namespace Tetris_WPF.Class
             }
         }
 
-        public void Timer(Grid grid)
+        public void Timer(Grid grid, Label score)
         {
             timer.Interval = TimeSpan.FromSeconds(0.2);
             timer.Tick += (sender, e) =>
             {
-                Update(sender, e, grid);
+                Update(sender, e, grid, score);
             };
         }
 
@@ -227,7 +228,7 @@ namespace Tetris_WPF.Class
             }
         }
 
-        private void CheckLines(Grid grid)
+        private void CheckLines(Grid grid, Label score)
         {
             // Außenränder und Boden kollision
             for (int i = 0; i < 4; i++)
@@ -253,7 +254,7 @@ namespace Tetris_WPF.Class
                     richtung = "";
                     timer.Stop();
                     AddBlocktoList(grid);
-                    ClearLines(grid);
+                    ClearLines(grid, score);
                 }
             }
             //Kollisionsabfrage mit anderen Steinen
@@ -269,7 +270,7 @@ namespace Tetris_WPF.Class
                     {
                         timer.Stop();
                         AddBlocktoList(grid);
-                        ClearLines(grid);
+                        ClearLines(grid,score);
                         collision = true;
                         break;
                     }
@@ -316,7 +317,7 @@ namespace Tetris_WPF.Class
             }
         }
 
-        public void ClearLines(Grid grid)
+        public void ClearLines(Grid grid, Label score)
         {
             // eine Methode zum leeren der Reihen, falls eine voll sein sollte
             List<UIElement> elements = new List<UIElement>();
@@ -342,6 +343,8 @@ namespace Tetris_WPF.Class
                         grid.Children.Remove(elements[i]);
                     }
                     elements.Clear();
+                    sc = sc + 100;
+                    score.Content ="Score:" +sc ;
 
                     for (int nr = r; nr > 0; nr--)
                     {
@@ -377,6 +380,11 @@ namespace Tetris_WPF.Class
                     Grid.SetColumn(rec, col);
                 }
             }
+        }
+
+        private void GameOver()
+        {
+
         }
     }
 }

@@ -5,31 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tetris_WPF"
         mc:Ignorable="d"
-        Title="Game" Height="600" Width="500" Background="#FF544E4E">
-    <Grid x:Name="GridGame">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
+        Title="Game" MaxHeight="600" MaxWidth="500" Background="#FF544E4E" MinHeight="600" MinWidth="500">
+    <Grid KeyDown="KeyIsDown" KeyUp="KeyIsUp">
         <Grid.Background>
             <ImageBrush ImageSource="/Tetris.png"/>
         </Grid.Background>
-        <Viewbox Grid.Row="1"
-                 Grid.Column="1"
-                 Margin="0,0,0,0">
-            <Canvas x:Name="GameCanvas"
-                    Background="#101010"
-                    Width="220"
-                    Height="500"
-                    ClipToBounds="True"
-                    Loaded="GameCanvas_Loaded"/>
-        </Viewbox>
+        <Grid x:Name="gamegrid" Background="Black" Width="220" Height="500"/>
     </Grid>
 </Window>

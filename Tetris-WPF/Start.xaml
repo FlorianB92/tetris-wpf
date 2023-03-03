@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tetris_WPF"
         mc:Ignorable="d"
-        Title="Start" Height="450" Width="400">
+        Title="Start" MinHeight="450" MinWidth="400" MaxHeight="450" MaxWidth="400">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Tetris.png"/>

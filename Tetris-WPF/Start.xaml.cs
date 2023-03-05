@@ -28,17 +28,19 @@ namespace Tetris_WPF
         {
             Game game = new Game();
             game.Show();
-            Close();
+            this.Close();
         }
 
         private void OptionIsClick(object sender, RoutedEventArgs e)
         {
-
+            Option option = new Option();
+            option.Show();
+            this.Close();
         }
 
         private void ExitIsClick(object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Close();
         }
     }
 }

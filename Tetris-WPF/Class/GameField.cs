@@ -26,9 +26,10 @@ namespace Tetris_WPF.Class
         private List<Rectangle> DRlist = new List<Rectangle>();
         private List<Tetriminos> block = new List<Tetriminos>();
 
-        public bool goLeft, goRight, goDown, goFDown, goRotation;
+        public bool goLeft, goRight, goDown, goFDown, goRotation, gameOn;
         bool[] numbers = new bool[7];
         public string richtung;
+        int randomNumber;
         int anzahl = 0;
         int sc = 0;
 
@@ -40,12 +41,13 @@ namespace Tetris_WPF.Class
             this.rows = rows;
         }
 
-        public void StartGame(Grid grid, Label score)
+        public void StartGame(Grid grid, Grid endscreen, Label score, Label endscore, Image nextblock)
         {
+            gameOn = true; // um die Steuerung freizuschalten
+            randomNumber = rand.Next(0, 7);
             AddGridDefinition(grid);
             CreateBlock(grid);
-            Timer(grid, score);
-
+            Timer(grid, endscreen, score, endscore, nextblock);
         }
 
         public void AddGridDefinition(Grid grid)
@@ -63,46 +65,41 @@ namespace Tetris_WPF.Class
         }
 
         public void CreateBlock(Grid grid)
-        {
-            //eine Überprüfung ob alle Zahlen auf true gesetzt sind
+        {                   
+            Tetriminos nblock = new Tetriminos(randomNumber);
+            nblock.GiveAColor();
+            block.Add(nblock);
+            numbers[randomNumber] = true;
+            AddToBoard(grid);
+            block[0].Rotation();
+            block[0].rotation = 0;
+            timer.Start();
+            randomNumber = rand.Next(0, 7);
 
+            //eine Überprüfung ob alle Zahlen auf true gesetzt sind, falls ja werden sie auf false gesetzt
             for (int i = 0; i < 7; i++)
             {
-                if (numbers[i] == true)
-                    anzahl++;
-            }
-            if (anzahl == 7)
-            {
-
-                for (int i = 0; i < 7; i++)
-                    numbers[i] = false;
-                anzahl = 0;
-            }
-            else
-                anzahl = 0;
-
-            for (int i = 0; i < 7; i++)
-            {
-                int randomNumber = rand.Next(0, 7);
-                if (numbers[randomNumber])
+                int rnd = randomNumber;
+                if (anzahl == 7)
                 {
+                    for (int a = 0; a < 7; a++)
+                    {
+                        numbers[a] = false;
+                    }
+                    anzahl = 0;
+                }
+                if (numbers[rnd] == true)
+                {
+                    anzahl++;
                     i--;
+                    randomNumber = rand.Next(0, 7);
                 }
                 else
                 {
-                    Tetriminos nblock = new Tetriminos(randomNumber);
-                    nblock.GiveAColor();
-                    block.Add(nblock);
-                    numbers[randomNumber] = true;
-                    AddToBoard(grid);
-                    block[0].Rotation();
-                    block[0].rotation = 0;
-                    timer.Start();
-                    break;
-                }
-
+                    anzahl = 0;
+                    randomNumber = rnd;
+                }                 
             }
-
         }
 
         public void AddToBoard(Grid grid)
@@ -134,10 +131,12 @@ namespace Tetris_WPF.Class
             CreateBlock(grid);
         }
 
-        public void Update(object sender, EventArgs e, Grid grid, Label score)
+        public void Update(object sender, EventArgs e, Grid grid, Grid endscreen, Label score ,Label endscore, Image nextblock)
         {
-            CheckLines(grid, score);
-            Move();
+            // die Methode richtet sich nach dem interval des Timers
+            ShowNextBlock(nextblock);
+            CheckLines(grid, endscreen, score, endscore);
+            Move(grid, endscreen, score, endscore);
             for (int i = 0; i < 4; i++)
             {
                 Grid.SetColumn(Rlist[i], block[0].currentCol[i]);
@@ -145,16 +144,16 @@ namespace Tetris_WPF.Class
             }
         }
 
-        public void Timer(Grid grid, Label score)
+        public void Timer(Grid grid, Grid endscreen, Label score, Label endscore, Image nextblock)
         {
             timer.Interval = TimeSpan.FromSeconds(0.2);
             timer.Tick += (sender, e) =>
             {
-                Update(sender, e, grid, score);
+                Update(sender, e, grid, endscreen, score, endscore, nextblock);
             };
         }
 
-        private void Move()
+        private void Move(Grid grid, Grid endscreen, Label score, Label endscore)
         {
             if (goDown)
             {
@@ -200,9 +199,9 @@ namespace Tetris_WPF.Class
             if (goRotation)
             {
                 block[0].rotation++;
-                if (block[0].id == 0 || block[0].id == 1 || block[0].id == 2)
+                if (block[0].id == 0 || block[0].id == 1 || block[0].id == 2) 
                 {
-                    if (block[0].rotation > 2)
+                    if (block[0].rotation > 2) // hier wird verhindert das der Wert über den der Rotation übersteigt
                     {
                         block[0].rotation = 0;
                         block[0].Rotation();
@@ -228,7 +227,7 @@ namespace Tetris_WPF.Class
             }
         }
 
-        private void CheckLines(Grid grid, Label score)
+        private void CheckLines(Grid grid, Grid endscreen, Label score, Label endscore)
         {
             // Außenränder und Boden kollision
             for (int i = 0; i < 4; i++)
@@ -268,11 +267,20 @@ namespace Tetris_WPF.Class
                 {
                     if (block[0].currentRow[i] + 1 == row && block[0].currentCol[i] == col)
                     {
-                        timer.Stop();
-                        AddBlocktoList(grid);
-                        ClearLines(grid,score);
-                        collision = true;
-                        break;
+                        if(row == 3)
+                        {
+                            collision = true;
+                            GameOver(endscore, endscreen);
+
+                        }
+                        else
+                        {
+                            timer.Stop();
+                            AddBlocktoList(grid);
+                            ClearLines(grid, score);
+                            collision = true;
+                            break;
+                        }                       
                     }
                 }
                 if (collision)
@@ -288,7 +296,7 @@ namespace Tetris_WPF.Class
                 {
                     if (block[0].rotation == 0)
                     {
-                        if (block[0].currentCol[i] < 1 || block[0].currentCol[i] > 9)
+                        if (block[0].currentCol[i] < 2 || block[0].currentCol[i] > 9)
                         {
                             goRotation = false;
                         }
@@ -321,6 +329,7 @@ namespace Tetris_WPF.Class
         {
             // eine Methode zum leeren der Reihen, falls eine voll sein sollte
             List<UIElement> elements = new List<UIElement>();
+            int multi = 0;
             for (int r = rows - 1; r > 0; r--)
             {
                 for (int c = 0; c < 10; c++)
@@ -343,8 +352,7 @@ namespace Tetris_WPF.Class
                         grid.Children.Remove(elements[i]);
                     }
                     elements.Clear();
-                    sc = sc + 100;
-                    score.Content ="Score:" +sc ;
+                    multi++;
 
                     for (int nr = r; nr > 0; nr--)
                     {
@@ -358,7 +366,6 @@ namespace Tetris_WPF.Class
                                 RepositionDRlist(nr, c);
                             }
                         }
-
                     }
                     r++;
                 }
@@ -367,6 +374,16 @@ namespace Tetris_WPF.Class
                     elements.Clear();
                 }
             }
+            if (multi == 1)
+                sc = sc + 40;
+            if (multi == 2)
+                sc = sc + 100;
+            if(multi == 3)
+                sc = sc + 300;
+            if (multi == 4)
+                sc = sc + 1200; 
+            score.Content = "Score: " + sc;
+            multi = 0;
         }
         private void RepositionDRlist(int r, int i)
         {
@@ -382,9 +399,80 @@ namespace Tetris_WPF.Class
             }
         }
 
-        private void GameOver()
+        private void GameOver(Label endscore, Grid endscreen)
         {
+            gameOn = false;
+            timer.Stop();
+            goDown = false;
+            richtung = "";
+            timer.Interval = TimeSpan.FromSeconds(0);
+            endscore.Content = "Endscore: " + sc;
+            endscreen.Visibility = Visibility.Visible;
+        }
 
+        private void ShowNextBlock(Image nextblock)
+        {
+            // darstellung des nächsten Blocks
+            string path;
+            BitmapImage bitmap = new BitmapImage();
+            switch (randomNumber)
+            {
+                case 0: //Cleveland                   
+                    path = "pictures/ClevelandZ.png";
+                    bitmap.BeginInit();
+                    bitmap.UriSource= new Uri(path, UriKind.Relative);
+                    bitmap.EndInit();
+                    nextblock.Source = bitmap;
+                    break;
+
+                case 1: //Hero
+                    path = "pictures/Hero.png";
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(path, UriKind.Relative);
+                    bitmap.EndInit();
+                    nextblock.Source = bitmap;
+                    break;
+
+                case 2: //RhodeIslandZ
+                    path = "pictures/RhodeIslandZ.png";
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(path, UriKind.Relative);
+                    bitmap.EndInit();
+                    nextblock.Source = bitmap;
+                    break;
+
+                case 3: //RickyB
+                    path = "pictures/BlueRicky.png";
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(path, UriKind.Relative);
+                    bitmap.EndInit();
+                    nextblock.Source = bitmap;
+                    break;
+
+                case 4: //RickyO
+                    path = "pictures/OrangeRicky.png";
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(path, UriKind.Relative);
+                    bitmap.EndInit();
+                    nextblock.Source = bitmap;
+                    break;
+
+                case 5: //Smashboy
+                    path = "pictures/Smashboy.png";
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(path, UriKind.Relative);
+                    bitmap.EndInit();
+                    nextblock.Source = bitmap;
+                    break;
+
+                case 6: //Teewee
+                    path = "pictures/Teewee.png";
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(path, UriKind.Relative);
+                    bitmap.EndInit();
+                    nextblock.Source = bitmap;
+                    break;
+            }
         }
     }
 }

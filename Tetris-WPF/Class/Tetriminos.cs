@@ -27,6 +27,7 @@ namespace Tetris_WPF.Class
         }
         public void GiveAColor()
         {
+            // Position und Farbe wird gegeben
             switch (id)
             {
                 case 0: //ClevelandZ

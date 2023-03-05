@@ -5,12 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tetris_WPF"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="Game" MaxHeight="600" MaxWidth="500" Background="#FF544E4E" MinHeight="600" MinWidth="500">
     <Grid KeyDown="KeyIsDown" KeyUp="KeyIsUp">
         <Grid.Background>
-            <ImageBrush ImageSource="/Tetris.png"/>
+            <ImageBrush ImageSource="pictures\Tetris.png"/>
         </Grid.Background>
-        <Grid x:Name="gamegrid" Background="Black" Width="220" Height="500"/>
+        <Grid x:Name="gamegrid" Background="Black" Width="220" Height="500">
+        </Grid>
         <Label x:Name="score" Content="Score: 0" VerticalAlignment="Top" Height="37" Width="182" FontSize="22" FontFamily="Algerian" FontWeight="Bold" HorizontalAlignment="Center"/>
+        <TextBox x:Name="pause" HorizontalAlignment="Center" Margin="0,151,0,0" TextWrapping="Wrap" Text="Pause" VerticalAlignment="Top" Width="208" Height="40" FontSize="24" TextAlignment="Center" Foreground="#FFBD6464" Visibility="Hidden" Background="{x:Null}" IsEnabled="False"/>
+        <Label Content="Next" HorizontalAlignment="Left" Margin="398,6,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontStyle="Italic"/>
+        <Image x:Name="nextblock" HorizontalAlignment="Left" Height="100" Margin="381,48,0,0" VerticalAlignment="Top" Width="100"/>
+        <Grid x:Name="endscreen" Height="200" Width="220" Background="#FF6B6B6B" Margin="140,105,140,279" Opacity="0.85" Visibility="Hidden">
+            <Label Content="Game Over" Margin="0,10,0,131" FontSize="36" HorizontalAlignment="Left" Width="200" HorizontalContentAlignment="Center" >
+                <Label.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FFC72121" Offset="1"/>
+                    </LinearGradientBrush>
+                </Label.Foreground>
+            </Label>
+            <Label x:Name="endscore" Content="Endscore:" Margin="0,73,0,75" FontSize="20" RenderTransformOrigin="0.508,0.832"/>
+            <Label Content="Press ESC for Exit!" FontSize="24" HorizontalAlignment="Left" Margin="0,138,0,20" Background="{x:Null}" Width="200" HorizontalContentAlignment="Center">
+                <Label.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FFC72121" Offset="1"/>
+                    </LinearGradientBrush>
+                </Label.Foreground>
+            </Label>
+        </Grid>
     </Grid>
 </Window>

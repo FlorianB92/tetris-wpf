@@ -60,6 +60,9 @@
     <Compile Include="Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Option.xaml.cs">
+      <DependentUpon>Option.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Start.xaml.cs">
       <DependentUpon>Start.xaml</DependentUpon>
     </Compile>
@@ -68,6 +71,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Game.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Option.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -103,7 +110,28 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Tetris.png" />
+    <Resource Include="pictures\Tetris.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\BlueRicky.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\ClevelandZ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\Hero.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\OrangeRicky.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\RhodeIslandZ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\Smashboy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pictures\Teewee.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

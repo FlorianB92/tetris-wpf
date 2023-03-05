@@ -24,48 +24,59 @@ namespace Tetris_WPF
         public Game()
         {
             InitializeComponent();
-            field.StartGame(gamegrid, score);
+            field.StartGame(gamegrid, endscreen, score, endscore, nextblock);
             KeyDown += KeyIsDown;
             KeyUp += KeyIsUp;
         }
 
         private void KeyIsDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.D)
+            if (field.gameOn)
             {
-                field.goRight = true;
-                field.goRotation = false;
-            }
-
-            if (e.Key == Key.A)
-            {
-                field.goLeft = true;
-                field.goRotation = false;
-            }
-
-            if (e.Key == Key.S)
-            {
-                field.goFDown = true;
-                field.goRotation = false;
-            }
-
-            if (e.Key == Key.Space)
-            {
-                field.Rotation();
-            }
-
-            if (e.Key == Key.P)
-            {
-                if (field.timer.IsEnabled)
+                if (e.Key == Key.D)
                 {
-                    field.timer.Stop();
+                    field.goRight = true;
+                    field.goRotation = false;
                 }
-                else
+
+                if (e.Key == Key.A)
                 {
-                    field.timer.Start();
+                    field.goLeft = true;
+                    field.goRotation = false;
+                }
+
+                if (e.Key == Key.S)
+                {
+                    field.goFDown = true;
+                    field.goRotation = false;
+                }
+
+                if (e.Key == Key.Space)
+                {
+                    field.Rotation();
+                }
+            
+                if (e.Key == Key.P)
+                {
+                    if (field.timer.IsEnabled)
+                    {
+                        field.timer.Stop();
+                        pause.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        field.timer.Start();
+                        pause.Visibility = Visibility.Hidden;
+                    }
                 }
             }
-
+            if(e.Key == Key.Escape)
+            {
+                Start start = new Start();
+                start.Show();
+                this.Close();
+                
+            }
         }
 
         private void KeyIsUp(object sender, KeyEventArgs e)
